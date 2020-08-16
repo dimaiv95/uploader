@@ -3,7 +3,6 @@ import express from "express";
 import bodyParser from "body-parser";
 import multer from "multer";
 import dotenv from "dotenv";
-
 import mongoose from "mongoose";
 
 import apiRouter from "./apiRouter";
@@ -35,13 +34,20 @@ app.get("/", (req, res, next) => {
 app.use("/api", uploadFiles.single("files"), apiRouter);
 
 app.use((req, res, next) => {
-    res.status(404).send("Not found");
+    res.status(404).json("Not found");
+});
+
+app.use((error, req, res, next) => {
+    const { statusCode, message } = error;
+    
+    res.status(statusCode).json(message);
 });
 
 const { MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE } = process.env;
+const MONGO_URL = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-r22i4.mongodb.net/${MONGO_DATABASE}`;
 
 mongoose
-    .connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-r22i4.mongodb.net/${MONGO_DATABASE}`)
+    .connect(MONGO_URL)
     .then(() => {
         app.listen(5000, () => {
             console.log("Server started on 5000");
