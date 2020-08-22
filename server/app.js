@@ -2,12 +2,9 @@ import path from "path";
 import express from "express";
 import bodyParser from "body-parser";
 import multer from "multer";
-import dotenv from "dotenv";
 import mongoose from "mongoose";
 
 import apiRouter from "./apiRouter";
-
-dotenv.config();
 
 const app = express();
 
