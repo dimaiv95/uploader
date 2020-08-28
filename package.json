@@ -23,6 +23,7 @@
     "@babel/register": "^7.10.5",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^4.2.1",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
@@ -33,12 +34,14 @@
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-node-externals": "^2.5.2"
   },
   "scripts": {
-    "start:client": "webpack-dev-server --env.mode=development --open",
-    "build:client": "webpack --env.mode=production",
+    "start:client": "webpack-dev-server --config webpack.config.client.js --env.mode=development --open",
+    "build:client": "webpack --config webpack.config.client.js --env.mode=production",
     "start:server": "set NODE_ENV=development && nodemon server/index.js",
+    "build:server": "webpack --config webpack.config.server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

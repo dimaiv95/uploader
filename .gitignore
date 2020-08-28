@@ -1,5 +1,16 @@
+# general
 node_modules
 .vscode/
+
+# server
 nodemon.json
 /server/images/*
-/client/build
+!.gitkeep
+
+# client
+/client/build/
+
+# build
+/build/
+/images/
+/index.js

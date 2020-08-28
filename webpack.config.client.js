@@ -19,7 +19,7 @@ module.exports = (env = {}) => {
         entry: "./src/index.js",
         output: {
             path: path.resolve(__dirname, "client", "build"),
-            filename:  "./js/[name].[hash:8].bundle.js"
+            filename:  "js/[name].[hash:8].bundle.js"
         },
         module: {
             rules: [
@@ -49,7 +49,7 @@ module.exports = (env = {}) => {
                 template: path.join(__dirname, "client", "/public/index.html")
             }),
             new MiniCssExtractPlugin({
-                filename: "./css/[name].[hash:8].css"
+                filename: "css/[name].[hash:8].css"
             }),
             new CleanWebpackPlugin()
         ],
