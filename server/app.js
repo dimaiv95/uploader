@@ -45,7 +45,7 @@ if(NODE_ENV.trim() !== "development"){
 }
 
 app.use((error, req, res, next) => {
-    const { statusCode, message } = error;
+    const { statusCode = 500, message } = error;
     
     res.status(statusCode).json(message);
 });
