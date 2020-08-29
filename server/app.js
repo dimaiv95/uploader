@@ -1,5 +1,6 @@
 import path from "path";
 import express from "express";
+import cors from "cors";
 import bodyParser from "body-parser";
 import multer from "multer";
 import mongoose from "mongoose";
@@ -14,6 +15,8 @@ const {
 } = process.env;
 
 const app = express();
+
+app.use(cors());
 
 const storage = multer.diskStorage({
     destination (req, file, cb) {

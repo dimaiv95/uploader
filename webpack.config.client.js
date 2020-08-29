@@ -54,7 +54,15 @@ module.exports = (env = {}) => {
             new CleanWebpackPlugin()
         ],
         devServer: {
-            contentBase: path.resolve("client", "build")
+            contentBase: path.resolve("client", "build"),
+            port: 3000,
+            proxy: {
+                "/images": {
+                    target: "http://localhost:5000",
+                    secure: false,
+                    changeOrigin: true
+                }
+            }
         }
     };
 };
