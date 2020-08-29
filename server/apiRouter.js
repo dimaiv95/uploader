@@ -5,13 +5,13 @@ import { getPhotos, getPhoto, postPhoto } from "./apiController";
 const router = express.Router();
 
 //GET:  /photos
-//GET:  /photo/:photoID
-//POST: /photo
+//GET:  /photos/:photoID
+//POST: /photos
 
 router.get("/photos", getPhotos);
 
-router.get("/photo/:photoID", getPhoto);
+router.get("/photos/:photoID", getPhoto);
 
-router.post("/photo", postPhoto);
+router.post("/photos", postPhoto);
 
 export default router;

@@ -30,8 +30,7 @@ export const getPhoto = async (req, res, next) => {
             error.statusCode = 422;
             return next(error);
         }
-        
-        console.log(photo);
+
         res.json(photo);
     }
     catch(error){
