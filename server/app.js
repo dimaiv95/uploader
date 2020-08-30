@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import multer from "multer";
 import mongoose from "mongoose";
 
+import discStorage from "./discStorage";
 import apiRouter from "./apiRouter";
 
 const {
@@ -18,12 +19,12 @@ const app = express();
 
 app.use(cors());
 
-const storage = multer.diskStorage({
+const storage = discStorage({
     destination (req, file, cb) {
-        cb(null, path.join(__dirname, "images"))
+        cb(null, path.join(__dirname, "images"));
     },
     filename (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`)
+        cb(null, file.originalname);
     }
 });
 const uploadFiles = multer({ storage: storage });

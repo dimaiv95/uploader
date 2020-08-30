@@ -1,4 +1,5 @@
 import Photos from "./apiModel";
+import { namesSize } from "./utils";
 
 export const getPhotos = async (req, res, next) => {
     try{
@@ -50,11 +51,17 @@ export const postPhoto = async (req, res, next) => {
         return next(error);
     }
     
-    const { filename } = file;
-    const addPhoto = new Photos({
-        name: filename,
-        url: `/images/${filename}`
+    const { foldername, filename } = file;
+    const image = {};
+
+    namesSize.forEach(s => {
+        image[s] = {
+            name: filename[s],
+            url: `/images/${foldername}/${filename[s]}`
+        };
     });
+
+    const addPhoto = new Photos(image);
 
     try{
         const photo = await addPhoto.save();
