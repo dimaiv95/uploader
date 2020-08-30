@@ -31,11 +31,12 @@ const resizeImages = async (file, destination, foldername, filename, sizes) => {
         return new Promise((resolve, reject) => {
             const filenameResize    = `${namesSize[i]}.${foldername}.${filename}`;
             const finalPath         = path.join(destination, foldername, filenameResize);
-            const outStream         = fs.createWriteStream(finalPath);
             const transformer       = sharp().resize(s);
+            const outStream         = fs.createWriteStream(finalPath);
 
             file.stream.pipe(transformer).pipe(outStream);
 
+            transformer.on("error", reject);
             outStream.on("error", reject);
             outStream.on("finish", () => resolve({
                 destination: destination,
@@ -64,18 +65,24 @@ class DiscStorage {
                     return cb(err);
                 }
                 
-                const foldername = await createFolder(destination);
-                const images = await resizeImages(file, destination, foldername, filename, sizes);
-                const folderDestination = path.join(destination, foldername);
+                try{
+                    const foldername = await createFolder(destination);
+                    const images = await resizeImages(file, destination, foldername, filename, sizes);
 
-                cb(null, {
-                    folderDestination: folderDestination,
-                    destination: mapImagesToImageProps(images, "destination"),
-                    foldername: foldername,
-                    filename: mapImagesToImageProps(images, "filename"),
-                    path: mapImagesToImageProps(images, "path"),
-                    size: mapImagesToImageProps(images, "size")
-                });
+                    const folderDestination = path.join(destination, foldername);
+    
+                    cb(null, {
+                        folderDestination: folderDestination,
+                        destination: mapImagesToImageProps(images, "destination"),
+                        foldername: foldername,
+                        filename: mapImagesToImageProps(images, "filename"),
+                        path: mapImagesToImageProps(images, "path"),
+                        size: mapImagesToImageProps(images, "size")
+                    });
+                }
+                catch(err){
+                    cb(err);
+                }
             });
         });
     }
