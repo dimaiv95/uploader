@@ -44,12 +44,19 @@ export const getPhoto = async (req, res, next) => {
 
 export const postPhoto = async (req, res, next) => {
     const { file } = req;
+
+    if(!file){
+        const error = new Error("No image provided.");
+        error.statusCode = 422;
+        return next(error);
+    }
+
     const { foldername, filename } = file;
     const image = {};
     
-    if(!file || !filename){
-        const error = new Error("No image provided.");
-        error.statusCode = 422;
+    if(!foldername || !filename){
+        const error = new Error("Error with loading image.");
+        error.statusCode = 500;
         return next(error);
     }
 

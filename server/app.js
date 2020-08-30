@@ -27,7 +27,18 @@ const storage = discStorage({
         cb(null, file.originalname);
     }
 });
-const uploadFiles = multer({ storage: storage });
+
+const fileFilter = (req, file, cb) => {
+    if(file.mimetype === "image/png" || 
+    file.mimetype === "image/jpg"|| 
+    file.mimetype === "image/jpeg"){
+        cb(null, true);
+    }
+    else{
+        cb(null, false);
+    }
+}
+const uploadFiles = multer({ storage: storage, fileFilter: fileFilter });
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 
