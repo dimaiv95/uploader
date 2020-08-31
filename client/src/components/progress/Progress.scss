@@ -1,0 +1,27 @@
+.progress{
+    flex: 0 0 100%;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 4px;
+    border-radius: 10px;
+    overflow: hidden;
+    &__meter{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 4px;
+        border-radius: 10px;
+        background-color: #1fb9dd;
+        z-index: 2;
+    }
+    &__line{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: lighten(#1fb9dd, 40%);
+        z-index: 1;
+    }
+}
