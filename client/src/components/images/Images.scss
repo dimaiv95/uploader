@@ -1,0 +1,64 @@
+.images{
+    width: 100%;
+    height: 100%;
+    &__row{
+        flex: 0 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: auto;
+        height: auto;
+        margin: -15px -15px;
+    }
+    &__col{
+        $size: 1200px;
+        flex: 0 0 calc(#{$size} / 3);
+        width: calc(#{$size} / 3);
+        height: calc(#{$size} / 3);
+        box-sizing: border-box;
+        padding: 15px;
+    }
+}
+
+@media only screen and (max-width: 1200px){
+    .images{
+        &__col{
+            $size: 992px;
+            flex: 0 0 calc(#{$size} / 3);
+            width: calc(#{$size} / 3);
+            height: calc(#{$size} / 3);
+        }
+    }
+}
+
+@media only screen and (max-width: 992px){
+    .images{
+        &__col{
+            $size: 768px;
+            flex: 0 0 calc(#{$size} / 3);
+            width: calc(#{$size} / 3);
+            height: calc(#{$size} / 3);
+        }
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .images{
+        &__col{
+            $size: 576px;
+            flex: 0 0 calc(#{$size} / 3);
+            width: calc(#{$size} / 3);
+            height: calc(#{$size} / 3);
+        }
+    }
+}
+
+@media only screen and (max-width: 576px){
+    .images{
+        &__col{
+            flex: 0 0 100vw;
+            width: 100vw;
+            height: 100vw;
+        }
+    }
+}

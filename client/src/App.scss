@@ -1,3 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none !important;
+    box-shadow: none;
+}
+
 body{
     background-color: #fff;
+}
+
+.uploader{
+    max-width: 1200px;
+    height: auto;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 15px;
+    &__content{
+        padding: 15px 0;
+    }
+}
+
+@media only screen and (max-width: 1200px){
+    .uploader{
+        width: 992px;
+    }
+}
+
+@media only screen and (max-width: 992px){
+    .uploader{
+        width: 768px;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .uploader{
+        width: 576px;
+    }
+}
+
+@media only screen and (max-width: 576px){
+    .uploader{
+        width: 100%;
+    }
 }
