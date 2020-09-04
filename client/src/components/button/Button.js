@@ -6,7 +6,7 @@ const Button = () => {
     return(
         <div className="button">
             <input type="file" name="files" id="files" />
-            <label for="files"></label>
+            <label htmlFor="files"></label>
         </div>
 
     );

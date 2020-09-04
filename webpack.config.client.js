@@ -57,6 +57,11 @@ module.exports = (env = {}) => {
             contentBase: path.resolve("client", "build"),
             port: 3000,
             proxy: {
+                "/api": {
+                    target: "http://localhost:5000",
+                    secure: false,
+                    changeOrigin: true
+                },
                 "/images": {
                     target: "http://localhost:5000",
                     secure: false,

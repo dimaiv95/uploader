@@ -1,4 +1,10 @@
 import React from "react";
+import { Provider } from "react-redux"
+
+import PhotosAPI from "./service/PhotosAPI";
+import { PhotosAPIProvider, UploaderProvider } from "./contexts";
+
+import store from "./store";
 
 import Button from "./components/button";
 import Progress from "./components/progress";
@@ -6,19 +12,25 @@ import Images from "./components/images";
 
 import "./App.scss";
 
+const photosAPI = new PhotosAPI();
+
 const App = () => {
     return (
-        <div class="uploader">
-            <div className="uploader__content">
-                <Button />
-            </div>
-            <div className="uploader__content">
-                <Progress percent={60} />
-            </div>
-            <div className="uploader__content">
-                <Images />
-            </div>
-        </div>
+        <Provider store={ store }>
+            <PhotosAPIProvider value={ photosAPI }>
+                <div className="uploader">
+                    <div className="uploader__content">
+                        <Button />
+                    </div>
+                    <div className="uploader__content">
+                        <Progress percent={ 60 } />
+                    </div>
+                    <div className="uploader__content">
+                        <Images />
+                    </div>
+                </div>
+            </PhotosAPIProvider>
+        </Provider>
     );
 };
 

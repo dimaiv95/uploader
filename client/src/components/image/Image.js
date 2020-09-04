@@ -2,10 +2,10 @@ import React from "react";
 
 import "./Image.scss"
 
-const Image = () => {
+const Image = ({ url }) => {
     return(
         <div className="image">
-            <img src="https://cdn.stocksnap.io/img-thumbs/960w/aerial-beach_ZFML0REGIS.jpg" alt="image" />
+            <img src={ url } alt="image" />
         </div>
     );
 };
