@@ -11,9 +11,7 @@ const getDestination = (req, file, cb) => {
 };
 
 const getFilename = (req, file, cb) => {
-    crypto.randomBytes(16, function (err, raw) {
-        cb(err, err ? undefined : raw.toString("hex"));
-    });
+    cb(null, file.originalname);
 };
 
 const mapImagesToImageProps = (images, prop) => {
