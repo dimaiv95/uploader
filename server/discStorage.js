@@ -1,7 +1,6 @@
 import fs from "fs";
 import fse from "fs-extra";
 import path from "path";
-import crypto from "crypto";
 import sharp from "sharp";
 
 import { namesSize, sizes, createFolder } from "./utils";
