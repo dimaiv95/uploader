@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { requestAllPhotos, loadAllPhotos, errorAllPhotos } from "../store/actions";
+import { getRequest, getAllPhotosSuccess, getAllPhotosError } from "../store/actions";
 
 const useGetAllPhotos = (request) => {
     const dispath = useDispatch();
@@ -11,7 +11,7 @@ const useGetAllPhotos = (request) => {
     const error = useSelector(state => state.error);
 
     useEffect(() => {
-        dispath(requestAllPhotos());
+        dispath(getRequest());
 
         let cancelled = false;
 
@@ -21,10 +21,10 @@ const useGetAllPhotos = (request) => {
                 if(response.status !== 200){
                     throw new Error("Failed to fetch photos");
                 }
-                !cancelled && dispath(loadAllPhotos(response.data));
+                !cancelled && dispath(getAllPhotosSuccess(response.data));
             })
             .catch(error => {
-                !cancelled && dispath(errorAllPhotos(error));
+                !cancelled && dispath(getAllPhotosError(error));
             });
 
         return () => cancelled = true;
