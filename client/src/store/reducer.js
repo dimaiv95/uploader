@@ -10,7 +10,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 loading: true,
                 error: null,
-                photos: []
+                photos: state.photos.length ? [...state.photos] : []
             };
         case "GET_ALL_PHOTOS_SUCCESS":
             return {
@@ -23,6 +23,18 @@ const rootReducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload,
                 photos: []
+            };
+        case "POST_PHOTO_SUCCESS":
+            return {
+                loading: false,
+                error: null,
+                photos: [ ...state.photos, action.payload]
+            };
+        case "POST_PHOTO_ERROR":
+            return {
+                loading: false,
+                error: action.payload,
+                photos: [ ...state.photos]
             };
         default: return state;
         

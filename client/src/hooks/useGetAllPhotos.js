@@ -17,7 +17,6 @@ const useGetAllPhotos = (request) => {
 
         request()
             .then(response => {
-                console.log(response)
                 if(response.status !== 200){
                     throw new Error("Failed to fetch photos");
                 }

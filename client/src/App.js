@@ -26,7 +26,11 @@ const App = () => {
                         <Progress percent={ 60 } />
                     </div>
                     <div className="uploader__content">
-                        <Images />
+                        <div className="images">
+                            <div className="images__row">
+                                <Images />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </PhotosAPIProvider>

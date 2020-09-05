@@ -1,3 +1,4 @@
 import useGetAllPhotos from "./useGetAllPhotos";
+import usePostPhoto from "./usePostPhoto";
 
-export { useGetAllPhotos };
+export { useGetAllPhotos, usePostPhoto };

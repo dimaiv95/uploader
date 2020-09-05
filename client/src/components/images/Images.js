@@ -11,27 +11,29 @@ const Images = () => {
     const { getAllPhotos } = useContext(PhotosAPIContext);
     const { loading, photos, error } = useGetAllPhotos(getAllPhotos);
 
-    return(
-        <div className="images">
-            <div className="images__row">
-            {
-                loading && <div className="images__col">Loading...</div>
-            }
-            {
-                error && <div className="images__col">Error...</div>
-            }
-            { 
-                (!loading && !error && photos.length) && photos.map(({ _id, medium }) => {
-                    return(
-                        <div key={ _id } className="images__col">
-                            <Image url={ medium.url } />
-                        </div>
-                    )
-                })
-            } 
-            </div>
-        </div>
-    );
+    if(loading && !photos.length){
+        return(
+            <div className="images__col">Loading...</div>
+        );
+    }
+    
+    if(error){
+        return(
+            <div className="images__col">Error...</div>
+        );
+    }
+
+    if(photos.length){
+        return(
+            photos.map(({ _id, medium }) => {
+                return(
+                    <div key={ _id } className="images__col">
+                        <Image url={ medium.url } />
+                    </div>
+                )
+            })
+        );
+    }
 };
 
 export default Images;
