@@ -47,7 +47,7 @@
   "scripts": {
     "start:client": "webpack-dev-server --config webpack.config.client.js --env.mode=development --open",
     "build:client": "webpack --config webpack.config.client.js --env.mode=production",
-    "start:server": "set NODE_ENV=development && nodemon server/index.js",
+    "start:server": "set NODE_ENV=development && nodemon ./server/index.js",
     "build:server": "webpack --config webpack.config.server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
