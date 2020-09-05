@@ -1,9 +1,9 @@
-import Photos from "./apiModel";
+import Photo from "./apiModel";
 import { namesSize } from "./utils";
 
 export const getPhotos = async (req, res, next) => {
     try{
-        const photos = await Photos.find();
+        const photos = await Photo.find();
         
         if(!photos){
             const error = new Error("Could not find photos.");
@@ -24,7 +24,7 @@ export const getPhotos = async (req, res, next) => {
 export const getPhoto = async (req, res, next) => {
     const { photoID } = req.params;
     try{
-        const photo = await Photos.findById(photoID);
+        const photo = await Photo.findById(photoID);
 
         if(!photo){
             const error = new Error("Could not find photo.");
@@ -67,7 +67,7 @@ export const postPhoto = async (req, res, next) => {
         };
     });
 
-    const addPhoto = new Photos(image);
+    const addPhoto = new Photo(image);
 
     try{
         const photo = await addPhoto.save();
