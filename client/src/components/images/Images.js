@@ -10,9 +10,7 @@ import "./Images.scss";
 const Images = () => {
     const { getAllPhotos } = useContext(PhotosAPIContext);
     const { loading, data, error } = useGetAllPhotos(getAllPhotos);
-
-    console.log(loading, data, error)
-
+    
     if(loading && !data.length){
         return(
             <div className="images__col">Loading...</div>

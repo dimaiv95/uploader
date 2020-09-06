@@ -9,6 +9,7 @@
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "framer-motion": "^2.6.6",
     "fs-extra": "^9.0.1",
     "mongodb": "^3.6.0",
     "mongoose": "^5.10.0",
