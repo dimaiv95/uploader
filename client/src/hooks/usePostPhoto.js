@@ -1,13 +1,13 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-import { getRequest, postPhotoSuccess, postPhotoError } from "../store/actions";
+import { postPhotoRequest, postPhotoSuccess, postPhotoError } from "../store/actions";
 
 const usePostPhoto = (request) => {
     const dispath = useDispatch();
 
     return useCallback((data) => {
-        dispath(getRequest());
+        dispath(postPhotoRequest());
 
         let cancelled = false;
 

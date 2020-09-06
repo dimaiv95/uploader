@@ -9,9 +9,11 @@ import "./Images.scss";
 
 const Images = () => {
     const { getAllPhotos } = useContext(PhotosAPIContext);
-    const { loading, photos, error } = useGetAllPhotos(getAllPhotos);
+    const { loading, data, error } = useGetAllPhotos(getAllPhotos);
 
-    if(loading && !photos.length){
+    console.log(loading, data, error)
+
+    if(loading && !data.length){
         return(
             <div className="images__col">Loading...</div>
         );
@@ -23,9 +25,9 @@ const Images = () => {
         );
     }
 
-    if(photos.length){
+    if(data.length){
         return(
-            photos.map(({ _id, medium }) => {
+            data.map(({ _id, medium }) => {
                 return(
                     <div key={ _id } className="images__col">
                         <Image url={ medium.url } />

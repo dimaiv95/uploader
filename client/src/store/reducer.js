@@ -1,40 +1,79 @@
 const initialState = {
-    loading: true,
-    error: null,
-    photos: []
+    photos: {
+        loading: true,
+        error: null,
+        data: []
+    },
+    upload: {
+        loading: false,
+        error: null,
+        data: []
+    }
 }
 
 const rootReducer = (state = initialState, action) => {
     switch(action.type){
-        case "GET_REQUEST":
+        case "GET_ALL_PHOTOS_REQUEST":
             return {
-                loading: true,
-                error: null,
-                photos: state.photos.length ? [...state.photos] : []
+                ...state,
+                photos: {
+                    loading: true,
+                    error: null,
+                    data: state.photos.data.length ? [...state.photos.data] : []
+                } 
             };
         case "GET_ALL_PHOTOS_SUCCESS":
             return {
-                loading: false,
-                error: null,
-                photos: action.payload
+                ...state,
+                photos: {
+                    loading: false,
+                    error: null,
+                    data: action.payload
+                }
             };
         case "GET_ALL_PHOTOS_ERROR":
             return {
-                loading: false,
-                error: action.payload,
-                photos: []
+                ...state,
+                photos: {
+                    loading: false,
+                    error: action.payload,
+                    data: []
+                }
+            };
+        case "POST_PHOTO_REQUEST":
+            return {
+                photos: {
+                    loading: true,
+                    error: null,
+                    data: state.photos.data.length ? [...state.photos.data] : []
+                },
+                upload: {
+                    loading: true,
+                    error: null,
+                    data: []
+                }
             };
         case "POST_PHOTO_SUCCESS":
             return {
-                loading: false,
-                error: null,
-                photos: [ ...state.photos, action.payload]
+                photos: {
+                    loading: false,
+                    error: null,
+                    data: [...state.photos.data, action.payload]
+                },
+                upload: {
+                    loading: false,
+                    error: null,
+                    data: action.payload
+                }
             };
         case "POST_PHOTO_ERROR":
             return {
-                loading: false,
-                error: action.payload,
-                photos: [ ...state.photos]
+                ...state,
+                upload: {
+                    loading: false,
+                    error: action.payload,
+                    data: []
+                }
             };
         default: return state;
         

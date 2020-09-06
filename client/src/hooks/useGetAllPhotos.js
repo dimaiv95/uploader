@@ -1,17 +1,21 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getRequest, getAllPhotosSuccess, getAllPhotosError } from "../store/actions";
+import { getAllPhotosRequest, getAllPhotosSuccess, getAllPhotosError } from "../store/actions";
 
 const useGetAllPhotos = (request) => {
     const dispath = useDispatch();
 
-    const loading = useSelector(state => state.loading);
-    const photos = useSelector(state => state.photos);
-    const error = useSelector(state => state.error);
+    const { loading, data, error } = useSelector(({ photos }) => ({
+        loading: photos.loading,
+        data: photos.data,
+        error: photos.error
+    }));
+    // const photos = useSelector({ photos } => state.photos);
+    // const error = useSelector({ photos } => state.error);
 
     useEffect(() => {
-        dispath(getRequest());
+        dispath(getAllPhotosRequest());
 
         let cancelled = false;
 
@@ -30,7 +34,7 @@ const useGetAllPhotos = (request) => {
 
     }, [request]);
 
-    return { loading, photos, error };
+    return { loading, data, error };
 };
 
 export default useGetAllPhotos;
