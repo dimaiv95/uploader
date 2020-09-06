@@ -23,7 +23,7 @@ const App = () => {
                         <Button />
                     </div>
                     <div className="uploader__content">
-                        <Progress percent={ 60 } />
+                        <Progress />
                     </div>
                     <div className="uploader__content">
                         <div className="images">

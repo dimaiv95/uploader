@@ -1,7 +1,13 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-import { postPhotoRequest, postPhotoSuccess, postPhotoComplete, postPhotoError } from "../store/actions";
+import {
+    postPhotoRequest,
+    postPhotoProgress,
+    postPhotoSuccess,
+    postPhotoComplete,
+    postPhotoError
+} from "../store/actions";
 
 const usePostPhoto = (request) => {
     const dispath = useDispatch();
@@ -11,7 +17,9 @@ const usePostPhoto = (request) => {
 
         let cancelled = false;
         
-        request(data)
+        const progress = (precent) => dispath(postPhotoProgress(precent));
+
+        request(data, progress)
             .then(response => {
                 if(response.status !== 201){
                     throw new Error("Failed to fetch photos");

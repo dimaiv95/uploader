@@ -6,6 +6,7 @@ const initialState = {
     },
     upload: {
         loading: false,
+        progress: 0,
         success: false,
         complete: true,
         error: null,
@@ -47,6 +48,19 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 upload: {
                     loading: true,
+                    progress: 0,
+                    success: false,
+                    complete: false,
+                    error: null,
+                    data: null
+                }
+            };
+        case "POST_PHOTO_PROGRESS":
+            return {
+                ...state,
+                upload: {
+                    loading: true,
+                    progress: action.payload,
                     success: false,
                     complete: false,
                     error: null,
@@ -62,6 +76,7 @@ const rootReducer = (state = initialState, action) => {
                 },
                 upload: {
                     loading: false,
+                    progress: state.upload.progress,
                     success: true,
                     complete: false,
                     error: null,
@@ -73,6 +88,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 upload: {
                     loading: false,
+                    progress: state.upload.progress,
                     success: false,
                     complete: true,
                     error: null,
@@ -84,6 +100,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 upload: {
                     loading: false,
+                    progress: state.upload.progress,
                     success: false,
                     complete: false,
                     error: action.payload,

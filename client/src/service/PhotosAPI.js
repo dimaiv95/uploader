@@ -8,12 +8,20 @@ class PhotosAPI{
         });
     }
 
-    postPhoto = async (photo) => {
+    postPhoto = async (data, cb) => {
         return await axios({
             method: "post",
             headers: { "Content-Type": "multipart/form-data" },
             url: "/api/photos/",
-            data: photo
+            data,
+            onUploadProgress(progressEvent) {
+                const { loaded, total } = progressEvent;
+                let precent = Math.ceil(loaded * 100) / total;
+
+                precent = precent >= 100 ? 100 : precent;
+
+                cb(precent);
+            }
         });
     }
 }
