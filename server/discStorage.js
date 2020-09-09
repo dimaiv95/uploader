@@ -23,7 +23,7 @@ const mapImagesToImageProps = (images, prop) => {
     return imageProps;
 };
 
-const resizeImages = async (file, destination, foldername, filename, sizes) => {
+const resizeImages = async (req, file, destination, foldername, filename, sizes) => {
     return Promise.all(sizes.map((s, i) => {
         return new Promise((resolve, reject) => {
             const filenameResize    = `${namesSize[i]}.${foldername}.${filename}`;
@@ -32,6 +32,18 @@ const resizeImages = async (file, destination, foldername, filename, sizes) => {
             const outStream         = fs.createWriteStream(finalPath);
 
             file.stream.pipe(transformer).pipe(outStream);
+
+            req.on("aborted", () => {
+                file.stream.destroy();
+
+                const { destroyed } = file.stream;
+
+                if(destroyed){
+                    transformer.destroy();
+                    outStream.destroy();
+                    reject(new Error("Connection was broken."))
+                };
+            });
 
             transformer.on("error", reject);
             outStream.on("error", reject);
@@ -53,6 +65,7 @@ class DiscStorage {
     }
 
     _handleFile(req, file, cb){
+
         this.getDestination(req, file, (err, destination) => {
             if(err){
                 return cb(err);
@@ -62,12 +75,15 @@ class DiscStorage {
                     return cb(err);
                 }
                 
+                let folderDestination;
+
                 try{
                     const foldername = await createFolder(destination);
-                    const images = await resizeImages(file, destination, foldername, filename, sizes);
+                    
+                    folderDestination = path.join(destination, foldername);
 
-                    const folderDestination = path.join(destination, foldername);
-    
+                    const images = await resizeImages(req, file, destination, foldername, filename, sizes);
+
                     cb(null, {
                         folderDestination: folderDestination,
                         destination: mapImagesToImageProps(images, "destination"),
@@ -78,6 +94,10 @@ class DiscStorage {
                     });
                 }
                 catch(err){
+                    if(folderDestination){
+                        fse.remove(folderDestination, cb);
+                        return false;
+                    }
                     cb(err);
                 }
             });
