@@ -23,18 +23,7 @@ const Button = () => {
         error: upload.error
     }));
 
-    
-    const postData = usePostPhoto(postPhoto);
-    
-    const handleChange = ({ target }) => {
-        const { files } = target;
-        const file = files[0];
-        const formData = new FormData();
-        
-        formData.append("files", file, file.name);
-        
-        postData(formData)
-    };
+    const handleChange = usePostPhoto(postPhoto);
 
     return(
         <motion.div className="button" whileHover={{ scale: 1.1 }} >

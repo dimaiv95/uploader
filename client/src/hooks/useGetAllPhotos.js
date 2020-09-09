@@ -11,8 +11,6 @@ const useGetAllPhotos = (request) => {
         data: photos.data,
         error: photos.error
     }));
-    // const photos = useSelector({ photos } => state.photos);
-    // const error = useSelector({ photos } => state.error);
 
     useEffect(() => {
         dispath(getAllPhotosRequest());
