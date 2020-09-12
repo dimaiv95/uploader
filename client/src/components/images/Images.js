@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { PhotosAPIContext } from "../../contexts";
+import React from "react";
 
 import { useGetAllPhotos } from "../../hooks";
 
@@ -8,8 +7,7 @@ import Image from "../image";
 import "./Images.scss";
 
 const Images = () => {
-    const { getAllPhotos } = useContext(PhotosAPIContext);
-    const { loading, data, error } = useGetAllPhotos(getAllPhotos);
+    const { loading, data, error } = useGetAllPhotos();
 
     if(!data.length){
         return(

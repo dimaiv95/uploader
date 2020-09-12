@@ -1,38 +1,16 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useContext, useCallback } from "react";
+import { PhotosAPIContext } from "../contexts";
 
 import { getAllPhotosRequest, getAllPhotosSuccess, getAllPhotosError } from "../store/actions";
 
-const useGetAllPhotos = (request) => {
-    const dispath = useDispatch();
+import useRequest from "./useRequest";
 
-    const { loading, data, error } = useSelector(({ photos }) => ({
-        loading: photos.loading,
-        data: photos.data,
-        error: photos.error
-    }));
+const useGetAllPhotos = () => {
+    const { getAllPhotos } = useContext(PhotosAPIContext);
 
-    useEffect(() => {
-        dispath(getAllPhotosRequest());
+    const request = useCallback(() => getAllPhotos(), []);
 
-        let cancelled = false;
-
-        request()
-            .then(response => {
-                if(response.status !== 200){
-                    throw new Error("Failed to fetch photos");
-                }
-                !cancelled && dispath(getAllPhotosSuccess(response.data));
-            })
-            .catch(error => {
-                !cancelled && dispath(getAllPhotosError(error));
-            });
-
-        return () => cancelled = true;
-
-    }, [request]);
-
-    return { loading, data, error };
+    return useRequest(request, getAllPhotosRequest, getAllPhotosSuccess, getAllPhotosError);
 };
 
 export default useGetAllPhotos;
