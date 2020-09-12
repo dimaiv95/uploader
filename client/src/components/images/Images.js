@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetAllPhotos } from "../../hooks";
-import Image from "../image";
+import ImageItem from "../image-item";
 
 import Spiner from "../spiner";
 import Empty from "../empty";
@@ -11,12 +11,18 @@ const ImagesView = ({ data }) => {
     return(
         <div className="images__row">
         {
-            data.map(({ _id, medium }) => {
+            data.map(({ _id, thumbnail, medium }) => {
+                const image = {
+                    color: "#fcf4b5",
+                    thumbnail: thumbnail.url,
+                    medium: medium.url
+                };
+
                 return(
                     <div key={ _id } className="images__col">
-                        <Image url={ medium.url } />
+                        <ImageItem { ...image } />
                     </div>
-                )
+                );
             })
         }
         </div>

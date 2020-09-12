@@ -1,3 +1,4 @@
 import useGetAllPhotos from "./useGetAllPhotos";
+import useProgressiveImage from "./useProgressiveImage";
 
-export { useGetAllPhotos };
+export { useGetAllPhotos, useProgressiveImage };
