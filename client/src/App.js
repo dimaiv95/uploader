@@ -2,7 +2,7 @@ import React from "react";
 import { Provider } from "react-redux"
 
 import PhotosAPI from "./service/PhotosAPI";
-import { PhotosAPIProvider, UploaderProvider } from "./contexts";
+import { PhotosAPIProvider } from "./contexts";
 
 import store from "./store";
 
@@ -26,11 +26,7 @@ const App = () => {
                         <Progress />
                     </div>
                     <div className="uploader__content">
-                        <div className="images">
-                            <div className="images__row">
-                                <Images />
-                            </div>
-                        </div>
+                        <Images />
                     </div>
                 </div>
             </PhotosAPIProvider>
