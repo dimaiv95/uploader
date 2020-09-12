@@ -60,7 +60,7 @@ const Button = () => {
     return(
         <motion.div className="button" whileHover={{ scale: 1.1 }} >
             <input type="file" name="files" id="files" onChange={ handleChange } />
-            <label htmlFor="files" className="button__upload"></label>
+            { complete && <label htmlFor="files" className="button__upload"></label> }
             <svg
                 version="1.1"
                 id="button__svg"
