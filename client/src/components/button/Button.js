@@ -1,8 +1,15 @@
 import React, { useContext } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 import { PhotosAPIContext } from "../../contexts";
-import { usePostPhoto } from "../../hooks";
+import {
+    postPhotoRequest,
+    postPhotoProgress,
+    postPhotoSuccess,
+    postPhotoComplete,
+    postPhotoError
+} from "../../store/actions";
+
 import {
     completeVariants,
     loadingVariants,
@@ -22,8 +29,33 @@ const Button = () => {
         complete: upload.complete,
         error: upload.error
     }));
+    const dispath = useDispatch();
 
-    const handleChange = usePostPhoto(postPhoto);
+    const handleChange = ({ target }) => {
+        const { files } = target;
+        const file = files[0];
+        const formData = new FormData();
+        const progress = (precent) => dispath(postPhotoProgress(precent));
+        
+        formData.append("files", file, file.name);
+        
+        dispath(postPhotoRequest());
+        
+        postPhoto(formData, progress)
+            .then(response => {
+                if(response.status !== 201){
+                    throw new Error("Failed to fetch photos");
+                }
+                dispath(postPhotoSuccess(response.data)) && setTimeout(() => {
+                    dispath(postPhotoComplete());
+                }, 1200);
+            })
+            .catch(error => {
+                dispath(postPhotoError(error)) && setTimeout(() => {
+                    dispath(postPhotoComplete());
+                }, 1200);
+            });
+    };
 
     return(
         <motion.div className="button" whileHover={{ scale: 1.1 }} >
