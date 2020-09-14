@@ -11,16 +11,16 @@ const ImagesView = ({ data }) => {
     return(
         <div className="images__row">
         {
-            data.map(({ _id, thumbnail, medium }) => {
-                const image = {
-                    color: "#fcf4b5",
+            data.map(({ _id, image: { thumbnail, medium }, color }) => {
+                const photo = {
+                    color,
                     thumbnail: thumbnail.url,
                     medium: medium.url
                 };
 
                 return(
                     <div key={ _id } className="images__col">
-                        <ImageItem { ...image } />
+                        <ImageItem { ...photo } />
                     </div>
                 );
             })

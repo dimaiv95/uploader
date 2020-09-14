@@ -43,7 +43,7 @@ export const getPhoto = async (req, res, next) => {
 };
 
 export const postPhoto = async (req, res, next) => {
-    const { file } = req;
+    const { file, body } = req;
 
     if(!file){
         const error = new Error("No image provided.");
@@ -52,6 +52,7 @@ export const postPhoto = async (req, res, next) => {
     }
 
     const { foldername, filename } = file;
+    const { color } = body;
     const image = {};
     
     if(!foldername || !filename){
@@ -67,7 +68,12 @@ export const postPhoto = async (req, res, next) => {
         };
     });
 
-    const addPhoto = new Photo(image);
+    const photo = {
+        image,
+        color
+    };
+
+    const addPhoto = new Photo(photo);
 
     try{
         const photo = await addPhoto.save();

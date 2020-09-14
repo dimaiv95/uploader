@@ -19,6 +19,8 @@ import {
     errorVariants
 } from "./animation-settings";
 
+import { getColorCover } from "../../utils";
+
 import "./Button.scss";
 
 const Button = () => {
@@ -35,9 +37,12 @@ const Button = () => {
         const { files } = target;
         const file = files[0];
         const formData = new FormData();
-        const progress = (precent) => dispath(postPhotoProgress(precent));
-        
+        const color  = getColorCover();
+
         formData.append("files", file, file.name);
+        formData.append("color", color);
+
+        const progress = (precent) => dispath(postPhotoProgress(precent));
         
         dispath(postPhotoRequest());
         
