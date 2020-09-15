@@ -29,8 +29,15 @@ body{
     box-sizing: border-box;
     margin: 0 auto;
     padding: 15px;
+    &__panel,
     &__content{
         padding: 15px 0;
+    }
+    &__content{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        min-height: calc(100vh - 164px);
     }
 }
 

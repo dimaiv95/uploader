@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { useProgressiveImage } from "../../hooks";
 
 import "./ImageItem.scss";
 
-const ImageItem = ({ color, thumbnail, medium }) => {
+const ImageItem = ({ _id, color, thumbnail, medium }) => {
     const {
         isCover,
         blur,
@@ -23,8 +24,10 @@ const ImageItem = ({ color, thumbnail, medium }) => {
 
     return(
         <div className="image">
-            { isCover && <div className="image__cover" style={ styleCover } ></div> }
-            <img src={ url } alt="image" style={ styleImage }  />
+            <Link to={ `/${ _id }` } >
+                { isCover && <div className="image__cover" style={ styleCover } ></div> }
+                <img src={ url } alt="image" style={ styleImage }  />
+            </Link>
         </div>
     );
 };

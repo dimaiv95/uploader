@@ -1,15 +1,15 @@
 import React from "react";
 import { Provider } from "react-redux";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import PhotosAPI from "./service/PhotosAPI";
 import { PhotosAPIProvider } from "./contexts";
 
 import store from "./store";
 
-import Portal from "./components/portal";
 import Button from "./components/button";
 import Progress from "./components/progress";
-import Images from "./components/images";
+import { HomePage, NotFoundPage, PopupImagePage } from "./pages";
 
 import "./App.scss";
 
@@ -19,17 +19,22 @@ const App = () => {
     return (
         <Provider store={ store }>
             <PhotosAPIProvider value={ photosAPI }>
-                <div className="uploader">
-                    <div className="uploader__content">
-                        <Button />
+                <Router>
+                    <div className="uploader">
+                        <div className="uploader__panel">
+                            <Button />
+                        </div>
+                        <div className="uploader__panel">
+                            <Progress />
+                        </div>
+                        <div className="uploader__content">
+                            <Switch>
+                                <Route path="/:id?" exact component={ HomePage } />
+                                <Route component={ NotFoundPage } />
+                            </Switch>
+                        </div>
                     </div>
-                    <div className="uploader__content">
-                        <Progress />
-                    </div>
-                    <div className="uploader__content">
-                        <Images />
-                    </div>
-                </div>
+                </Router>
             </PhotosAPIProvider>
         </Provider>
     );

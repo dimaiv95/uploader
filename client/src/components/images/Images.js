@@ -13,6 +13,7 @@ const ImagesView = ({ data }) => {
         {
             data.map(({ _id, image: { thumbnail, medium }, color }) => {
                 const photo = {
+                    _id,
                     color,
                     thumbnail: thumbnail.url,
                     medium: medium.url
