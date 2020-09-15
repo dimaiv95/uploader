@@ -1,11 +1,12 @@
 import React from "react";
-import { Provider } from "react-redux"
+import { Provider } from "react-redux";
 
 import PhotosAPI from "./service/PhotosAPI";
 import { PhotosAPIProvider } from "./contexts";
 
 import store from "./store";
 
+import Portal from "./components/portal";
 import Button from "./components/button";
 import Progress from "./components/progress";
 import Images from "./components/images";

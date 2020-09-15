@@ -18,6 +18,7 @@ module.exports = (env = {}) => {
         mode: isProd ? "production" : isDev && "development",
         entry: "./src/index.js",
         output: {
+            publicPath: "/",
             path: path.resolve(__dirname, "client", "build"),
             filename:  "js/[name].[hash:8].bundle.js"
         },
@@ -56,6 +57,7 @@ module.exports = (env = {}) => {
         devServer: {
             contentBase: path.resolve("client", "build"),
             port: 3000,
+            historyApiFallback: true,
             proxy: {
                 "/api": {
                     target: "http://localhost:5000",
