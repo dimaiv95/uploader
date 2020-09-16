@@ -4,6 +4,11 @@ const initialState = {
         error: null,
         data: []
     },
+    photo: {
+        loading: true,
+        error: null,
+        data: {}
+    },
     upload: {
         loading: false,
         progress: 0,
@@ -43,6 +48,33 @@ const rootReducer = (state = initialState, action) => {
                     data: []
                 }
             };
+        case "GET_PHOTO_BY_ID_REQUEST":
+            return {
+                ...state,
+                photo: {
+                    loading: true,
+                    error: null,
+                    data: {}
+                } 
+            };
+        case "GET_PHOTO_BY_ID_SUCCESS":
+            return {
+                ...state,
+                photo: {
+                    loading: false,
+                    error: null,
+                    data: action.payload
+                }
+            };
+        case "GET_PHOTO_BY_ID_ERROR":
+            return {
+                ...state,
+                photo: {
+                    loading: false,
+                    error: action.payload,
+                    data: {}
+                }
+            };
         case "POST_PHOTO_REQUEST":
             return {
                 ...state,
@@ -69,6 +101,7 @@ const rootReducer = (state = initialState, action) => {
             };
         case "POST_PHOTO_SUCCESS":
             return {
+                ...state,
                 photos: {
                     loading: false,
                     error: null,

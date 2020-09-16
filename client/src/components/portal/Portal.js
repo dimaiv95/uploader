@@ -1,31 +1,16 @@
 import { useMemo, useEffect } from "react";
 import ReactDOM from "react-dom";
 
-const Portal = ({ children, parent, className }) => {
-    const el = useMemo(() => document.createElement("div"));
+const Portal = ({ children }) => {
+    const popup = useMemo(() => document.getElementById("popup"));
 
     useEffect(() => {
-        const target = parent && parent.appendChild ? parent : document.body;
+        popup.classList.add("popup--open");
 
-        const classList = ["portal"];
+        return () => popup.classList.remove("popup--open");
+    }, [ popup ]);
 
-        if(className){
-            className.split(" ").forEach(c => {
-                classList.push(c);
-            });
-        }
-
-        classList.forEach(c => el.classList.add(c));
-
-        target.appendChild(el);
-
-        return () => {
-            target.removeChild(el);
-        }
-
-    }, [ el, parent, className ]);
-
-    return ReactDOM.createPortal(children, el)
+    return ReactDOM.createPortal(children, popup)
 };
 
 export default Portal;

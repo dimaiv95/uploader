@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import Images from "../components/images";
 
@@ -9,7 +9,7 @@ const HomePage = () => {
 
     return( 
         <Fragment>
-            { id && <PopupImagePage /> }
+            { id && <PopupImagePage id={ id } /> } 
             <Images />
         </Fragment>
     );

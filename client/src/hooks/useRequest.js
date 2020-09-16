@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const useRequest = (request, dispathRequest, dispathSuccess, dispathError) => {
+const useRequest = (request, selector, dispathRequest, dispathSuccess, dispathError) => {
     const dispath = useDispatch();
 
-    const { loading, data, error } = useSelector(({ photos }) => ({
-        loading: photos.loading,
-        data: photos.data,
-        error: photos.error
+    const { loading, data, error } = useSelector(state => ({
+        loading: state[selector].loading,
+        data: state[selector].data,
+        error: state[selector].error
     }));
 
     useEffect(() => {

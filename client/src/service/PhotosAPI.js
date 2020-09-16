@@ -8,6 +8,13 @@ class PhotosAPI{
         });
     }
 
+    getPhotoById = async (id) => {
+        return await axios({
+            method: "get",
+            url: `/api/photos/${id}`
+        });
+    }
+
     postPhoto = async (data, cb) => {
         return await axios({
             method: "post",

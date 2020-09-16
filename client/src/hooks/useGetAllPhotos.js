@@ -10,7 +10,7 @@ const useGetAllPhotos = () => {
 
     const request = useCallback(() => getAllPhotos(), []);
 
-    return useRequest(request, getAllPhotosRequest, getAllPhotosSuccess, getAllPhotosError);
+    return useRequest(request, "photos", getAllPhotosRequest, getAllPhotosSuccess, getAllPhotosError);
 };
 
 export default useGetAllPhotos;
