@@ -1,17 +1,17 @@
 import express from "express";
 
-import { getPhotos, getPhoto, postPhoto } from "./apiController";
+import { getImages, getImage, postImage } from "./apiController";
 
 const router = express.Router();
 
-//GET:  /photos
-//GET:  /photos/:photoID
-//POST: /photos
+//GET:  /images
+//GET:  /images/:imageID
+//POST: /images
 
-router.get("/photos", getPhotos);
+router.get("/images", getImages);
 
-router.get("/photos/:photoID", getPhoto);
+router.get("/images/:imageID", getImage);
 
-router.post("/photos", postPhoto);
+router.post("/images", postImage);
 
 export default router;

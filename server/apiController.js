@@ -1,17 +1,17 @@
-import Photo from "./apiModel";
+import Image from "./apiModel";
 import { namesSize } from "./utils";
 
-export const getPhotos = async (req, res, next) => {
+export const getImages = async (req, res, next) => {
     try{
-        const photos = await Photo.find();
+        const images = await Image.find();
         
-        if(!photos){
-            const error = new Error("Could not find photos.");
+        if(!images){
+            const error = new Error("Could not find images.");
             error.statusCode = 422;
             next(error);
         }
         
-        res.json(photos);
+        res.json(images);
     }
     catch(error){
         if(!error.statusCode){
@@ -21,18 +21,18 @@ export const getPhotos = async (req, res, next) => {
     }
 };
 
-export const getPhoto = async (req, res, next) => {
-    const { photoID } = req.params;
+export const getImage = async (req, res, next) => {
+    const { imageID } = req.params;
     try{
-        const photo = await Photo.findById(photoID);
+        const image = await Image.findById(imageID);
 
-        if(!photo){
-            const error = new Error("Could not find photo.");
+        if(!image){
+            const error = new Error("Could not find image.");
             error.statusCode = 422;
             return next(error);
         }
 
-        res.json(photo);
+        res.json(image);
     }
     catch(error){
         if(!error.statusCode){
@@ -42,7 +42,7 @@ export const getPhoto = async (req, res, next) => {
     }
 };
 
-export const postPhoto = async (req, res, next) => {
+export const postImage = async (req, res, next) => {
     const { file, body } = req;
 
     if(!file){
@@ -53,7 +53,7 @@ export const postPhoto = async (req, res, next) => {
 
     const { foldername, filename } = file;
     const { color } = body;
-    const image = {};
+    const imageSizes = {};
     
     if(!foldername || !filename){
         const error = new Error("Error with loading image.");
@@ -62,23 +62,23 @@ export const postPhoto = async (req, res, next) => {
     }
 
     namesSize.forEach(s => {
-        image[s] = {
+        imageSizes[s] = {
             name: filename[s],
             url: `/images/${foldername}/${filename[s]}`
         };
     });
 
-    const photo = {
-        image,
+    const data = {
+        image: imageSizes,
         color
     };
 
-    const addPhoto = new Photo(photo);
+    const newImage = new Image(data);
 
     try{
-        const photo = await addPhoto.save();
+        const image = await newImage.save();
 
-        res.status(201).json(photo._doc);
+        res.status(201).json(image._doc);
     }
     catch(error){
         if(!error.statusCode){

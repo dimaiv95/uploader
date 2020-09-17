@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const photoSchema = new Schema({
+const imageSchema = new Schema({
     image: {
         thumbnail: {
             name: {
@@ -51,4 +51,4 @@ const photoSchema = new Schema({
     }
 }, { timestamps: true });
 
-export default mongoose.model("Photo", photoSchema);
+export default mongoose.model("Image", imageSchema);

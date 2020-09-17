@@ -45,7 +45,6 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
 app.use("/api", uploadFiles.single("files"), apiRouter);
 
 if(NODE_ENV.trim() !== "development"){
