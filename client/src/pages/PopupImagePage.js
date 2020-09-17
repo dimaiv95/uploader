@@ -3,10 +3,10 @@ import React from "react";
 import Portal from "../components/portal";
 import { ModalImage } from "../components/modals";
 
-import { useGetPhotoById } from "../hooks";
+import { useGetImageById } from "../hooks";
 
 const PopupImagePage = ({ id }) => {
-    const { loading, data, error } = useGetPhotoById(id);
+    const { loading, data, error } = useGetImageById(id);
 
     return(
         <Portal>

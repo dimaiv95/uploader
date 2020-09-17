@@ -1,21 +1,21 @@
 import axios from "axios";
 
-class PhotosAPI{
-    getAllPhotos = async () => {
+class ImagesAPIService{
+    getAllImages = async () => {
         return await axios({
             method: "get",
             url: "/api/photos/"
         });
     }
 
-    getPhotoById = async (id) => {
+    getImageById = async (id) => {
         return await axios({
             method: "get",
             url: `/api/photos/${id}`
         });
     }
 
-    postPhoto = async (data, cb) => {
+    postImage = async (data, cb) => {
         return await axios({
             method: "post",
             headers: { "Content-Type": "multipart/form-data" },
@@ -33,4 +33,4 @@ class PhotosAPI{
     }
 }
 
-export default PhotosAPI;
+export default ImagesAPIService;

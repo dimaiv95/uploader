@@ -1,3 +1,3 @@
-import { PhotosAPIContext, PhotosAPIProvider, PhotosAPIConsumer } from "./photosAPI-context";
+import { ImagesAPIContext, ImagesAPIProvider, ImagesAPIConsumer } from "./images-api-context";
 
-export { PhotosAPIContext, PhotosAPIProvider, PhotosAPIConsumer };
+export { ImagesAPIContext, ImagesAPIProvider, ImagesAPIConsumer };

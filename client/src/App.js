@@ -1,24 +1,24 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import PhotosAPI from "./service/PhotosAPI";
-import { PhotosAPIProvider } from "./contexts";
+import ImagesAPIService from "./service";
+import { ImagesAPIProvider } from "./contexts";
 
 import store from "./store";
 
 import Button from "./components/button";
 import Progress from "./components/progress";
-import { HomePage, NotFoundPage, PopupImagePage } from "./pages";
+import { HomePage, NotFoundPage } from "./pages";
 
 import "./App.scss";
 
-const photosAPI = new PhotosAPI();
+const imagesAPIService = new ImagesAPIService();
 
 const App = () => {
     return (
         <Provider store={ store }>
-            <PhotosAPIProvider value={ photosAPI }>
+            <ImagesAPIProvider value={ imagesAPIService }>
                 <Router>
                     <div className="uploader">
                         <div className="uploader__panel">
@@ -35,7 +35,7 @@ const App = () => {
                         </div>
                     </div>
                 </Router>
-            </PhotosAPIProvider>
+            </ImagesAPIProvider>
         </Provider>
     );
 };

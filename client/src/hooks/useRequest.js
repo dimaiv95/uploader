@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const useRequest = (request, selector, dispathRequest, dispathSuccess, dispathError) => {
     const dispath = useDispatch();
-
+    
     const { loading, data, error } = useSelector(state => ({
         loading: state[selector].loading,
         data: state[selector].data,

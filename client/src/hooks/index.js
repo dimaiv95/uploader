@@ -1,5 +1,5 @@
-import useGetAllPhotos from "./useGetAllPhotos";
-import useGetPhotoById from "./useGetPhotoById";
+import useGetAllImages from "./useGetAllImages";
+import useGetImageById from "./useGetImageById";
 import useProgressiveImage from "./useProgressiveImage";
 
-export { useGetAllPhotos, useGetPhotoById, useProgressiveImage };
+export { useGetAllImages, useGetImageById, useProgressiveImage };

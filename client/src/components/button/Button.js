@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
-import { PhotosAPIContext } from "../../contexts";
+import { ImagesAPIContext } from "../../contexts";
 import {
-    postPhotoRequest,
-    postPhotoProgress,
-    postPhotoSuccess,
-    postPhotoComplete,
-    postPhotoError
+    postImageRequest,
+    postImageProgress,
+    postImageSuccess,
+    postImageComplete,
+    postImageError
 } from "../../store/actions";
 
 import {
@@ -24,7 +24,7 @@ import { getColorCover } from "../../utils";
 import "./Button.scss";
 
 const Button = () => {
-    const { postPhoto } = useContext(PhotosAPIContext);
+    const { postImage } = useContext(ImagesAPIContext);
     const { loading, success, complete, error } = useSelector(({ upload }) => ({
         loading: upload.loading,
         success: upload.success,
@@ -42,22 +42,22 @@ const Button = () => {
         formData.append("files", file, file.name);
         formData.append("color", color);
 
-        const progress = (precent) => dispath(postPhotoProgress(precent));
+        const progress = (precent) => dispath(postImageProgress(precent));
         
-        dispath(postPhotoRequest());
+        dispath(postImageRequest());
         
-        postPhoto(formData, progress)
+        postImage(formData, progress)
             .then(response => {
                 if(response.status !== 201){
                     throw new Error("Failed to fetch photos");
                 }
-                dispath(postPhotoSuccess(response.data)) && setTimeout(() => {
-                    dispath(postPhotoComplete());
+                dispath(postImageSuccess(response.data)) && setTimeout(() => {
+                    dispath(postImageComplete());
                 }, 1200);
             })
             .catch(error => {
-                dispath(postPhotoError(error)) && setTimeout(() => {
-                    dispath(postPhotoComplete());
+                dispath(postImageError(error)) && setTimeout(() => {
+                    dispath(postImageComplete());
                 }, 1200);
             });
     };

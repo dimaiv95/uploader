@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetAllPhotos } from "../../hooks";
+import { useGetAllImages } from "../../hooks";
 import ImageItem from "../image-item";
 
 import Spiner from "../spiner";
@@ -31,7 +31,7 @@ const ImagesView = ({ data }) => {
 };
 
 const Images = () => {
-    const { loading, data, error } = useGetAllPhotos();
+    const { loading, data, error } = useGetAllImages();
 
     const hasData = (!loading && !error);
 
