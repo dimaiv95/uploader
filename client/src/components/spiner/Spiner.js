@@ -1,6 +1,6 @@
 import React from "react";
 
-import loadingImage from "./loading.gif";
+import loadingImage from "./loading.svg";
 import "./Spiner.scss";
 
 const Spiner = () => {
