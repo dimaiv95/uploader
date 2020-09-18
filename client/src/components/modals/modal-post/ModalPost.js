@@ -6,7 +6,7 @@ import "./ModalPost.scss";
 
 const ModalPostView = React.memo(({ data }) => {
     return(
-        <img src={ data.image.small.url } />
+        <img src={ data.image.medium.url } />
     );
 });
 

@@ -26,7 +26,7 @@
 }
 
 @media only screen and (max-width: 1200px){
-    .images{
+    .posts{
         &__col{
             $size: 992px;
             flex: 0 0 calc(#{$size} / 3);
@@ -37,7 +37,7 @@
 }
 
 @media only screen and (max-width: 992px){
-    .images{
+    .posts{
         &__col{
             $size: 768px;
             flex: 0 0 calc(#{$size} / 3);
@@ -48,7 +48,7 @@
 }
 
 @media only screen and (max-width: 768px){
-    .images{
+    .posts{
         &__col{
             $size: 576px;
             flex: 0 0 calc(#{$size} / 3);
@@ -59,7 +59,7 @@
 }
 
 @media only screen and (max-width: 576px){
-    .images{
+    .posts{
         &__col{
             flex: 0 0 100vw;
             width: 100vw;

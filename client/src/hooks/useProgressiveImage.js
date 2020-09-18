@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-const useProgressiveImage = (color, thumbnail, medium) => {
-    const [{ isCover, blur, urlThumbnail, urlMedium }, setUrl ] = useState({
+const useProgressiveImage = (color, thumbnail, small) => {
+    const [{ isCover, blur, urlThumbnail, urlSmall }, setUrl ] = useState({
         isCover: true,
         blur: 15,
         urlThumbnail: null,
-        urlMedium: null
+        urlSmall: null
     });
-    
+
     useEffect(() => {
         const thumbnailImage = new Image();
         thumbnailImage.src = thumbnail;
@@ -17,7 +17,7 @@ const useProgressiveImage = (color, thumbnail, medium) => {
                     isCover: false,
                     blur: 0,
                     urlThumbnail: thumbnail,
-                    urlMedium: image.urlMedium
+                    urlSmall: image.urlSmall
                 };
                 
             });
@@ -27,34 +27,34 @@ const useProgressiveImage = (color, thumbnail, medium) => {
                 isCover: true,
                 blur: 15,
                 urlThumbnail: null,
-                urlMedium: null
+                urlSmall: null
             });
         });
     
-        const mediumImage = new Image();
-        mediumImage.src = medium;
-        mediumImage.addEventListener("load", () => {
+        const smallImage = new Image();
+        smallImage.src = small;
+        smallImage.addEventListener("load", () => {
             setUrl((image) => {
                 return {
                     isCover: false,
                     blur: 0,
                     urlThumbnail: image.urlThumbnail,
-                    urlMedium: medium
+                    urlSmall: small
                 };
             });
         });
-        mediumImage.addEventListener("error", () => {
+        smallImage.addEventListener("error", () => {
             setUrl({
                 isCover: true,
                 blur: 15,
                 urlThumbnail: null,
-                urlMedium: null
+                urlSmall: null
             });
         });
     
-    }, [ color, thumbnail, medium ]);
+    }, [ color, thumbnail, small ]);
 
-    return { isCover, blur, urlThumbnail, urlMedium };
+    return { isCover, blur, urlThumbnail, urlSmall };
 };
 
 export default useProgressiveImage;

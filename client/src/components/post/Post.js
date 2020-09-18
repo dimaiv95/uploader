@@ -5,13 +5,13 @@ import { useProgressiveImage } from "../../hooks";
 
 import "./Post.scss";
 
-const Post = ({ _id, color, thumbnail, medium }) => {
+const Post = ({ _id, color, image: { thumbnail, small } }) => {
     const {
         isCover,
         blur,
         urlThumbnail,
-        urlMedium
-    } = useProgressiveImage(color, thumbnail, medium);
+        urlSmall
+    } = useProgressiveImage(color, thumbnail.url, small.url);
     
     const styleCover = {
         backgroundColor: color
@@ -20,7 +20,7 @@ const Post = ({ _id, color, thumbnail, medium }) => {
         filter: `blur(${blur}px)`
     };
 
-    const url = urlMedium ? urlMedium : urlThumbnail && urlThumbnail;
+    const url = urlSmall ? urlSmall : urlThumbnail && urlThumbnail;
 
     return(
         <div className="post">

@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetAllPosts } from "../../hooks";
-import ImageItem from "../post";
+import Post from "../post";
 
 import Spiner from "../spiner";
 import Empty from "../empty";
@@ -11,17 +11,16 @@ const PostsView = ({ data }) => {
     return(
         <div className="posts__row">
         {
-            data.map(({ _id, image: { thumbnail, medium }, color }) => {
+            data.map(({ _id, image, color }) => {
                 const photo = {
                     _id,
                     color,
-                    thumbnail: thumbnail.url,
-                    medium: medium.url
+                    image
                 };
 
                 return(
                     <div key={ _id } className="posts__col">
-                        <ImageItem { ...photo } />
+                        <Post { ...photo } />
                     </div>
                 );
             })
