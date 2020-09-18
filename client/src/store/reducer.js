@@ -1,10 +1,10 @@
 const initialState = {
-    images: {
+    posts: {
         loading: true,
         error: null,
         data: []
     },
-    image: {
+    post: {
         loading: true,
         error: null,
         data: {}
@@ -21,61 +21,61 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch(action.type){
-        case "GET_ALL_IMAGES_REQUEST":
+        case "GET_ALL_POSTS_REQUEST":
             return {
                 ...state,
-                images: {
+                posts: {
                     loading: true,
                     error: null,
-                    data: state.images.data.length ? [...state.images.data] : []
+                    data: state.posts.data.length ? [...state.posts.data] : []
                 } 
             };
-        case "GET_ALL_IMAGES_SUCCESS":
+        case "GET_ALL_POSTS_SUCCESS":
             return {
                 ...state,
-                images: {
+                posts: {
                     loading: false,
                     error: null,
                     data: action.payload
                 }
             };
-        case "GET_ALL_IMAGES_ERROR":
+        case "GET_ALL_POSTS_ERROR":
             return {
                 ...state,
-                images: {
+                posts: {
                     loading: false,
                     error: action.payload,
                     data: []
                 }
             };
-        case "GET_IMAGE_BY_ID_REQUEST":
+        case "GET_POST_BY_ID_REQUEST":
             return {
                 ...state,
-                image: {
+                post: {
                     loading: true,
                     error: null,
                     data: {}
                 } 
             };
-        case "GET_IMAGE_BY_ID_SUCCESS":
+        case "GET_POST_BY_ID_SUCCESS":
             return {
                 ...state,
-                image: {
+                post: {
                     loading: false,
                     error: null,
                     data: action.payload
                 }
             };
-        case "GET_IMAGE_BY_ID_ERROR":
+        case "GET_POST_BY_ID_ERROR":
             return {
                 ...state,
-                image: {
+                post: {
                     loading: false,
                     error: action.payload,
                     data: {}
                 }
             };
-        case "POST_IMAGE_REQUEST":
+        case "POST_POST_REQUEST":
             return {
                 ...state,
                 upload: {
@@ -87,7 +87,7 @@ const rootReducer = (state = initialState, action) => {
                     data: null
                 }
             };
-        case "POST_IMAGE_PROGRESS":
+        case "POST_POST_PROGRESS":
             return {
                 ...state,
                 upload: {
@@ -99,13 +99,13 @@ const rootReducer = (state = initialState, action) => {
                     data: null
                 }
             };
-        case "POST_IMAGE_SUCCESS":
+        case "POST_POST_SUCCESS":
             return {
                 ...state,
-                images: {
+                posts: {
                     loading: false,
                     error: null,
-                    data: [...state.images.data, action.payload]
+                    data: [...state.posts.data, action.payload]
                 },
                 upload: {
                     loading: false,
@@ -116,7 +116,7 @@ const rootReducer = (state = initialState, action) => {
                     data: action.payload
                 }
             };
-        case "POST_IMAGE_COMPLETE":
+        case "POST_POST_COMPLETE":
             return {
                 ...state,
                 upload: {
@@ -128,7 +128,7 @@ const rootReducer = (state = initialState, action) => {
                     data: { ...state.upload.data }
                 }
             };
-        case "POST_IMAGE_ERROR":
+        case "POST_POST_ERROR":
             return {
                 ...state,
                 upload: {
@@ -141,7 +141,6 @@ const rootReducer = (state = initialState, action) => {
                 }
             };
         default: return state;
-        
     }
 };
 

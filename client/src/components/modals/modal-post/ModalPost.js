@@ -2,22 +2,22 @@ import React from "react";
 
 import Spiner from "../../spiner";
 import Empty from "../../empty";
-import "./ModalImage.scss";
+import "./ModalPost.scss";
 
-const ModalImageView = React.memo(({ data }) => {
+const ModalPostView = React.memo(({ data }) => {
     return(
         <img src={ data.image.small.url } />
     );
 });
 
-const ModalImage = ({ id, loading, data, error }) => {
+const ModalPost = ({ id, loading, data, error }) => {
     
     const hasData = (!loading && !error);
 
     const errorComponent = error ? <Empty /> : null;
     const loadingComponent = loading ? <Spiner /> : null;
     const emptyComponent = hasData && !data ? <Empty /> : null;
-    const dataComponent = hasData && data ? <ModalImageView data={ data } /> : null;
+    const dataComponent = hasData && data ? <ModalPostView data={ data } /> : null;
 
     return(
         <div className="modal-image">
@@ -32,4 +32,4 @@ const ModalImage = ({ id, loading, data, error }) => {
     );
 };
 
-export default ModalImage;
+export default ModalPost;

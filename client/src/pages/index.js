@@ -1,5 +1,5 @@
 import HomePage from "./HomePage";
 import NotFoundPage from "./NotFoundPage";
-import PopupImagePage from "./PopupImagePage";
+import SinglePostPage from "./SinglePostPage";
 
-export { HomePage, NotFoundPage, PopupImagePage };
+export { HomePage, NotFoundPage, SinglePostPage };

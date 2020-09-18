@@ -2,8 +2,8 @@ import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import ImagesAPIService from "./service";
-import { ImagesAPIProvider } from "./contexts";
+import PostsAPIService from "./service";
+import { PostsAPIProvider } from "./contexts";
 
 import store from "./store";
 
@@ -13,12 +13,12 @@ import { HomePage, NotFoundPage } from "./pages";
 
 import "./App.scss";
 
-const imagesAPIService = new ImagesAPIService();
+const postsAPIService = new PostsAPIService();
 
 const App = () => {
     return (
         <Provider store={ store }>
-            <ImagesAPIProvider value={ imagesAPIService }>
+            <PostsAPIProvider value={ postsAPIService }>
                 <Router>
                     <div className="uploader">
                         <div className="uploader__panel">
@@ -35,7 +35,7 @@ const App = () => {
                         </div>
                     </div>
                 </Router>
-            </ImagesAPIProvider>
+            </PostsAPIProvider>
         </Provider>
     );
 };

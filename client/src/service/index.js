@@ -1,3 +1,3 @@
-import ImagesAPIService from "./images-api-service";
+import PostsAPIService from "./posts-api-service";
 
-export default ImagesAPIService;
+export default PostsAPIService;

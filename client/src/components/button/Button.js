@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
-import { ImagesAPIContext } from "../../contexts";
+import { PostsAPIContext } from "../../contexts";
 import {
-    postImageRequest,
-    postImageProgress,
-    postImageSuccess,
-    postImageComplete,
-    postImageError
+    postPostRequest,
+    postPostProgress,
+    postPostSuccess,
+    postPostComplete,
+    postPostError
 } from "../../store/actions";
 
 import {
@@ -24,7 +24,7 @@ import { getColorCover } from "../../utils";
 import "./Button.scss";
 
 const Button = () => {
-    const { postImage } = useContext(ImagesAPIContext);
+    const { postPost } = useContext(PostsAPIContext);
     const { loading, success, complete, error } = useSelector(({ upload }) => ({
         loading: upload.loading,
         success: upload.success,
@@ -42,22 +42,22 @@ const Button = () => {
         formData.append("files", file, file.name);
         formData.append("color", color);
 
-        const progress = (precent) => dispath(postImageProgress(precent));
+        const progress = (precent) => dispath(postPostProgress(precent));
         
-        dispath(postImageRequest());
+        dispath(postPostRequest());
         
-        postImage(formData, progress)
+        postPost(formData, progress)
             .then(response => {
                 if(response.status !== 201){
                     throw new Error("Failed to fetch photos");
                 }
-                dispath(postImageSuccess(response.data)) && setTimeout(() => {
-                    dispath(postImageComplete());
+                dispath(postPostSuccess(response.data)) && setTimeout(() => {
+                    dispath(postPostComplete());
                 }, 1200);
             })
             .catch(error => {
-                dispath(postImageError(error)) && setTimeout(() => {
-                    dispath(postImageComplete());
+                dispath(postPostError(error)) && setTimeout(() => {
+                    dispath(postPostComplete());
                 }, 1200);
             });
     };

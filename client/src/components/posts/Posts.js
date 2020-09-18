@@ -1,15 +1,15 @@
 import React from "react";
-import { useGetAllImages } from "../../hooks";
-import ImageItem from "../image-item";
+import { useGetAllPosts } from "../../hooks";
+import ImageItem from "../post";
 
 import Spiner from "../spiner";
 import Empty from "../empty";
 
-import "./Images.scss";
+import "./Posts.scss";
 
-const ImagesView = ({ data }) => {
+const PostsView = ({ data }) => {
     return(
-        <div className="images__row">
+        <div className="posts__row">
         {
             data.map(({ _id, image: { thumbnail, medium }, color }) => {
                 const photo = {
@@ -20,7 +20,7 @@ const ImagesView = ({ data }) => {
                 };
 
                 return(
-                    <div key={ _id } className="images__col">
+                    <div key={ _id } className="posts__col">
                         <ImageItem { ...photo } />
                     </div>
                 );
@@ -30,19 +30,19 @@ const ImagesView = ({ data }) => {
     );
 };
 
-const Images = () => {
-    const { loading, data, error } = useGetAllImages();
+const Posts = () => {
+    const { loading, data, error } = useGetAllPosts();
 
     const hasData = (!loading && !error);
 
     const errorComponent = error ? <Empty /> : null;
     const loadingComponent = loading ? <Spiner /> : null;
     const emptyComponent = hasData && !data.length ? <Empty /> : null;
-    const dataComponent = hasData && data.length ? <ImagesView data={ data } /> : null;
+    const dataComponent = hasData && data.length ? <PostsView data={ data } /> : null;
 
     return(
-        <div className="images">
-            <div className="images__content">
+        <div className="posts">
+            <div className="posts__content">
                 { loadingComponent }
                 { errorComponent }
                 { emptyComponent }
@@ -52,4 +52,4 @@ const Images = () => {
     );
 };
 
-export default Images;
+export default Posts;

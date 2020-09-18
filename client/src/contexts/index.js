@@ -1,3 +1,3 @@
-import { ImagesAPIContext, ImagesAPIProvider, ImagesAPIConsumer } from "./images-api-context";
+import { PostsAPIContext, PostsAPIProvider, PostsAPIConsumer } from "./posts-api-context";
 
-export { ImagesAPIContext, ImagesAPIProvider, ImagesAPIConsumer };
+export { PostsAPIContext, PostsAPIProvider, PostsAPIConsumer };

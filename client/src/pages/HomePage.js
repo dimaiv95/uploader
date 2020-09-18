@@ -1,16 +1,16 @@
-import React, { Fragment, useMemo } from "react";
+import React, { Fragment } from "react";
 import { useParams } from "react-router-dom";
-import Images from "../components/images";
+import Posts from "../components/posts";
 
-import { PopupImagePage } from "../pages";
+import { SinglePostPage } from "../pages";
 
 const HomePage = () => {
     const { id = null } = useParams();
 
     return( 
         <Fragment>
-            { id && <PopupImagePage id={ id } /> } 
-            <Images />
+            { id && <SinglePostPage id={ id } /> } 
+            <Posts />
         </Fragment>
     );
 };

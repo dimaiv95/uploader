@@ -1,3 +1,3 @@
-import ModalImage from "./modal-image";
+import ModalPost from "./modal-post";
 
-export { ModalImage };
+export { ModalPost };
