@@ -20,14 +20,14 @@ const ModalPost = ({ id, loading, data, error }) => {
     const dataComponent = hasData && data ? <ModalPostView data={ data } /> : null;
 
     return(
-        <div className="modal-image">
-            <div className="modal-image__content">
+        <div className="modal-post">
+            <div className="modal-post__content">
                 { loadingComponent }
                 { errorComponent }
                 { emptyComponent }
                 { dataComponent }
             </div>
-            <div className="modal-image__cover"></div>
+            <div className="modal-post__cover"></div>
         </div>
     );
 };
