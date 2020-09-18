@@ -4,14 +4,14 @@ class PostsAPIService{
     getAllPosts = async () => {
         return await axios({
             method: "get",
-            url: "/api/images/"
+            url: "/api/posts/"
         });
     }
 
     getPostById = async (id) => {
         return await axios({
             method: "get",
-            url: `/api/images/${id}`
+            url: `/api/posts/${id}`
         });
     }
 
@@ -19,7 +19,7 @@ class PostsAPIService{
         return await axios({
             method: "post",
             headers: { "Content-Type": "multipart/form-data" },
-            url: "/api/images/",
+            url: "/api/posts/",
             data,
             onUploadProgress(progressEvent) {
                 const { loaded, total } = progressEvent;

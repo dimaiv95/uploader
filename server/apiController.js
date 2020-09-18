@@ -1,17 +1,17 @@
-import Image from "./apiModel";
+import Post from "./apiModel";
 import { namesSize } from "./utils";
 
-export const getImages = async (req, res, next) => {
+export const getPosts = async (req, res, next) => {
     try{
-        const images = await Image.find();
+        const posts = await Post.find();
         
-        if(!images){
-            const error = new Error("Could not find images.");
+        if(!posts){
+            const error = new Error("Could not find posts.");
             error.statusCode = 422;
             next(error);
         }
         
-        res.json(images);
+        res.json(posts);
     }
     catch(error){
         if(!error.statusCode){
@@ -21,18 +21,18 @@ export const getImages = async (req, res, next) => {
     }
 };
 
-export const getImage = async (req, res, next) => {
-    const { imageID } = req.params;
+export const getPost = async (req, res, next) => {
+    const { postID } = req.params;
     try{
-        const image = await Image.findById(imageID);
+        const post = await Post.findById(postID);
 
-        if(!image){
-            const error = new Error("Could not find image.");
+        if(!post){
+            const error = new Error("Could not find post.");
             error.statusCode = 422;
             return next(error);
         }
 
-        res.json(image);
+        res.json(post);
     }
     catch(error){
         if(!error.statusCode){
@@ -42,7 +42,7 @@ export const getImage = async (req, res, next) => {
     }
 };
 
-export const postImage = async (req, res, next) => {
+export const postPost = async (req, res, next) => {
     const { file, body } = req;
 
     if(!file){
@@ -53,7 +53,7 @@ export const postImage = async (req, res, next) => {
 
     const { foldername, filename } = file;
     const { color } = body;
-    const imageSizes = {};
+    const image = {};
     
     if(!foldername || !filename){
         const error = new Error("Error with loading image.");
@@ -62,23 +62,23 @@ export const postImage = async (req, res, next) => {
     }
 
     namesSize.forEach(s => {
-        imageSizes[s] = {
+        image[s] = {
             name: filename[s],
             url: `/images/${foldername}/${filename[s]}`
         };
     });
 
     const data = {
-        image: imageSizes,
+        image,
         color
     };
 
-    const newImage = new Image(data);
+    const newPost = new Post(data);
 
     try{
-        const image = await newImage.save();
+        const post = await newPost.save();
 
-        res.status(201).json(image._doc);
+        res.status(201).json(post._doc);
     }
     catch(error){
         if(!error.statusCode){

@@ -39,7 +39,7 @@ const Button = () => {
         const formData = new FormData();
         const color  = getColorCover();
 
-        formData.append("files", file, file.name);
+        formData.append("images", file, file.name);
         formData.append("color", color);
 
         const progress = (precent) => dispath(postPostProgress(precent));
@@ -64,8 +64,8 @@ const Button = () => {
 
     return(
         <motion.div className="button" whileHover={{ scale: 1.1 }} >
-            <input type="file" name="files" id="files" onChange={ handleChange } />
-            { complete && <label htmlFor="files" className="button__upload"></label> }
+            <input type="file" name="images" id="images" onChange={ handleChange } />
+            { complete && <label htmlFor="images" className="button__upload"></label> }
             <svg
                 version="1.1"
                 id="button__svg"
