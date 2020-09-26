@@ -19,3 +19,21 @@ export const getColorCover = () => {
 
     return colors[colorIndex];
 };
+
+export const getSizeImage = (file) => {
+    return new Promise((resolve, reject) => {
+        const objectUrl = URL.createObjectURL(file);
+
+        const image = new Image();
+
+        image.addEventListener("load", function() {
+            resolve({
+                width: this.width,
+                height: this.height
+            });
+            URL.revokeObjectURL(objectUrl);
+        });
+
+        image.src = objectUrl;
+    });
+}

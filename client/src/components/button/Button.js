@@ -19,7 +19,7 @@ import {
     errorVariants
 } from "./animation-settings";
 
-import { getColorCover } from "../../utils";
+import { getColorCover, getSizeImage } from "../../utils";
 
 import "./Button.scss";
 
@@ -33,14 +33,19 @@ const Button = () => {
     }));
     const dispath = useDispatch();
 
-    const handleChange = ({ target }) => {
-        const { files } = target;
-        const file = files[0];
-        const formData = new FormData();
-        const color  = getColorCover();
+    const handleChange = async ({ target }) => {
+        const { files }         = target;
+        const file              = files[0];
+        const formData          = new FormData();
+        const color             = getColorCover();
+        const { width, height } = await getSizeImage(file);
+        const aspectRatio       = width / height;
 
         formData.append("images", file, file.name);
         formData.append("color", color);
+        formData.append("originalWidth", width);
+        formData.append("originalHeight", height);
+        formData.append("aspectRatio", aspectRatio);
 
         const progress = (precent) => dispath(postPostProgress(precent));
         
@@ -56,6 +61,7 @@ const Button = () => {
                 }, 1200);
             })
             .catch(error => {
+                console.log(error)
                 dispath(postPostError(error)) && setTimeout(() => {
                     dispath(postPostComplete());
                 }, 1200);

@@ -45,6 +45,20 @@ const postSchema = new Schema({
             }
         }
     },
+    metadata: {
+        originalWidth: {
+            type: Number,
+            required: true
+        },
+        originalHeight: {
+            type: Number,
+            required: true
+        },
+        aspectRatio: {
+            type: Number,
+            required: true
+        }
+    },
     color: {
        type: String,
        required: true 

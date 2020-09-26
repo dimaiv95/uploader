@@ -52,7 +52,8 @@ export const postPost = async (req, res, next) => {
     }
 
     const { foldername, filename } = file;
-    const { color } = body;
+    const { color, originalWidth, originalHeight, aspectRatio } = body;
+
     const image = {};
     
     if(!foldername || !filename){
@@ -70,7 +71,12 @@ export const postPost = async (req, res, next) => {
 
     const data = {
         image,
-        color
+        color,
+        metadata: {
+            originalWidth,
+            originalHeight,
+            aspectRatio
+        }
     };
 
     const newPost = new Post(data);
