@@ -1,12 +1,30 @@
-import React from "react";
+import React, { Fragment } from "react";
 
+import { useOnloadImage } from "../../../hooks";
 import Spiner from "../../spiner";
 import Empty from "../../empty";
+
 import "./ModalPost.scss";
 
 const ModalPostView = React.memo(({ data }) => {
+    const {
+        loading: loadingImage,
+        data: dataImage,
+        error: errorImage
+    } = useOnloadImage(data.image.medium.url);
+
+    const hasData = (!loadingImage && !errorImage);
+
+    const errorComponent = errorImage ? <Empty /> : null;
+    const emptyComponent = hasData && !dataImage ? <Empty /> : null;
+    const dataComponent = hasData && dataImage ? <img src={ data.image.medium.url } /> : null;
+
     return(
-        <img src={ data.image.medium.url } />
+        <Fragment>
+            { errorComponent }
+            { emptyComponent }
+            { dataComponent }
+        </Fragment>
     );
 });
 
