@@ -11,8 +11,8 @@ const Post = ({ _id, color, image: { thumbnail, small } }) => {
         blur,
         urlThumbnail,
         urlSmall
-    } = useProgressiveImage(color, thumbnail.url, small.url);
-    
+    } = useProgressiveImage(thumbnail.url, small.url);
+
     const styleCover = {
         backgroundColor: color
     };
