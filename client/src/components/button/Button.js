@@ -25,6 +25,7 @@ import "./Button.scss";
 
 const Button = () => {
     const { postPost } = useContext(PostsAPIContext);
+
     const { loading, success, complete, error } = useSelector(({ upload }) => ({
         loading: upload.loading,
         success: upload.success,

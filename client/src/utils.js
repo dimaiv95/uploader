@@ -36,4 +36,4 @@ export const getSizeImage = (file) => {
 
         image.src = objectUrl;
     });
-}
+};

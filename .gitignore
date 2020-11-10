@@ -14,3 +14,7 @@ nodemon.json
 /build/
 /images/
 /index.js
+
+# test
+coverage/
+__snapshots__
