@@ -7,7 +7,7 @@ describe("utils methods", () => {
         });
     
         afterAll(() => {
-            jest.spyOn(global.Math, "random").mockRestore();
+            global.Math.random.mockRestore();
         });
     
         const cases = [
